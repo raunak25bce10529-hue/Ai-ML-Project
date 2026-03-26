@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AI-powered resume analyzer that scores your resume across 6 dimensions and provides actionable feedback.">
+    <title>AI Resume Analyzer</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📄</text></svg>">
+</head>
+<body>
+    <div class="container">
+
+        <!-- Header -->
+        <header class="header">
+            <span class="header__icon">📄</span>
+            <h1 class="header__title">AI Resume Analyzer</h1>
+            <p class="header__subtitle">Upload your resume and paste a job description to get a detailed multi-dimensional analysis with actionable feedback.</p>
+        </header>
+
+        <!-- Error Banner -->
+        <div id="error-banner" class="error-banner">
+            <span>⚠️</span>
+            <span id="error-text"></span>
+        </div>
+
+        <!-- Upload Section -->
+        <section class="upload-section">
+            <div class="upload-grid">
+
+                <!-- PDF Upload -->
+                <div class="card">
+                    <h2 class="card__title">
+                        <span class="card__title-icon">📎</span>
+                        Upload Resume
+                    </h2>
+                    <div id="dropzone" class="dropzone">
+                        <span class="dropzone__icon">📤</span>
+                        <p class="dropzone__text">Drag & drop your PDF here</p>
+                        <p class="dropzone__hint">or click to browse • Max 10 MB</p>
+                        <div id="file-info" class="dropzone__filename hidden"></div>
+                    </div>
+                    <input type="file" id="file-input" accept=".pdf" hidden>
+                </div>
+
+                <!-- Job Description -->
+                <div class="card textarea-wrapper">
+                    <h2 class="card__title">
+                        <span class="card__title-icon">💼</span>
+                        Job Description
+                    </h2>
+                    <textarea
+                        id="job-desc"
+                        placeholder="Paste the full job description here...&#10;&#10;Example: We are looking for a Full Stack Developer with experience in React, Node.js, Python, and cloud services like AWS. The ideal candidate has 3+ years of experience and strong communication skills..."
+                    ></textarea>
+                </div>
+
+            </div>
+
+            <div class="btn-container">
+                <button id="analyze-btn" class="btn btn--primary" disabled>
+                    <span id="btn-text">🔍 Analyze Resume</span>
+                    <div id="btn-spinner" class="spinner hidden"></div>
+                </button>
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section id="results" class="results">
+
+            <!-- Score Hero Card -->
+            <div id="score-hero" class="card score-hero mb-24">
+                <div class="score-ring">
+                    <svg viewBox="0 0 120 120">
+                        <circle class="score-ring__bg" cx="60" cy="60" r="52" />
+                        <circle id="score-circle" class="score-ring__progress" cx="60" cy="60" r="52" 
+                                stroke-dasharray="326.73" stroke-dashoffset="326.73" />
+                    </svg>
+                    <div class="score-ring__value">
+                        <div id="score-number" class="score-number">0</div>
+                        <div class="score-label">Overall</div>
+                    </div>
+                </div>
+                <div id="grade-badge" class="grade-badge"></div>
+                <div class="grade-label">Resume Grade</div>
+            </div>
+
+            <!-- Dimension Scores -->
+            <div class="card mb-24">
+                <h3 class="card__title">
+                    <span class="card__title-icon">📊</span>
+                    Dimension Breakdown
+                </h3>
+                <div id="dimensions" class="dimensions-grid"></div>
+            </div>
+
+            <!-- Suggestions & Strengths -->
+            <div class="feedback-grid">
+                <div class="card">
+                    <h3 class="card__title">
+                        <span class="card__title-icon">💡</span>
+                        Suggestions
+                    </h3>
+                    <ul id="suggestions" class="feedback-list"></ul>
+                </div>
+                <div class="card">
+                    <h3 class="card__title">
+                        <span class="card__title-icon">✅</span>
+                        Strengths
+                    </h3>
+                    <ul id="strengths" class="feedback-list"></ul>
+                </div>
+            </div>
+
+            <!-- Missing Keywords -->
+            <div id="keywords-card" class="card mb-24">
+                <h3 class="card__title">
+                    <span class="card__title-icon">🔑</span>
+                    Missing Keywords
+                </h3>
+                <div id="keywords" class="keyword-tags"></div>
+            </div>
+
+            <!-- Section Analysis -->
+            <div class="card mb-24">
+                <h3 class="card__title">
+                    <span class="card__title-icon">📑</span>
+                    Section Analysis
+                </h3>
+                <div id="sections" class="sections-grid"></div>
+            </div>
+
+        </section>
+
+        <footer class="footer">
+            AI Resume Analyzer v4.0 — Multi-dimensional scoring powered by TF-IDF & NLP
+        </footer>
+
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
